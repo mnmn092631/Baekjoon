@@ -1,15 +1,12 @@
 let fs = require("fs");
 let [T, ...arr] = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
 
+const multipleUnitsArr = [[10], [1], [2, 4, 8, 6], [3, 9, 7, 1], [4, 6], [5], [6], [7, 9, 3, 1], [8, 4, 2, 6], [9, 1]];
+
 for (let i = 0; i < T; i++) {
 	const [a, b] = arr[i].split(" ");
-	let last = 1;
+	const multipleUnits = multipleUnitsArr[a % 10];
 
-	for (let j = 0; j < b; j++) {
-		last *= a;
-		if (last > 10) last %= 10;
-		if (last === 0) last = 10;
-	}
-
-	console.log(last);
+	if (multipleUnits.length === 1) console.log(multipleUnits[0]);
+	else console.log(multipleUnits[(b - 1) % multipleUnits.length]);
 }
